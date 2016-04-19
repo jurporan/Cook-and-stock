@@ -34,3 +34,6 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
+
+cook_and_stock/.idea
+cook_and_stock/cook_and_stock.iml
