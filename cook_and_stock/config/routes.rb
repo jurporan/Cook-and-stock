@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :dish_orders
+  resources :orders
+  resources :ingredient_stocks
+  resources :stocks
+  resources :dish_ingredients
+  resources :ingredients
   resources :roles
   devise_for :users
   resources :users

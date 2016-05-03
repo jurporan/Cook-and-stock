@@ -11,13 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426124111) do
+ActiveRecord::Schema.define(version: 20160503080930) do
+
+  create_table "dish_ingredients", force: :cascade do |t|
+    t.integer  "dish_id",       limit: 4
+    t.integer  "ingredient_id", limit: 4
+    t.float    "quantity",      limit: 24
+    t.string   "quantity_unit", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "dish_orders", force: :cascade do |t|
+    t.integer  "dish_id",    limit: 4
+    t.integer  "order_id",   limit: 4
+    t.integer  "quantity",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "dishes", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.text     "directions", limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "user_id",    limit: 4
+  end
+
+  create_table "ingredient_stocks", force: :cascade do |t|
+    t.integer  "ingredient_id", limit: 4
+    t.integer  "stock_id",      limit: 4
+    t.float    "quantity",      limit: 24
+    t.string   "quantity_unit", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "stock_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -29,6 +69,13 @@ ActiveRecord::Schema.define(version: 20160426124111) do
   create_table "roles_users", id: false, force: :cascade do |t|
     t.integer "role_id", limit: 4
     t.integer "user_id", limit: 4
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "location",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|
