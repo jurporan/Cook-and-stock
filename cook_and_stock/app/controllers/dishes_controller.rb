@@ -7,14 +7,13 @@ class DishesController < ApplicationController
     @dishes = Dish.all
   end
 
-  # GET /dishes/1
-  # GET /dishes/1.json
-  def show
-  end
-
   # GET /dishes/new
   def new
     @dish = Dish.new
+  end
+
+  # GET /dishes/1
+  def show
   end
 
   # GET /dishes/1/edit

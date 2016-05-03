@@ -15,4 +15,7 @@
 //= require bootstrap.min
 //= require jquery_ujs
 //= require turbolinks
+//= require data-confirm-modal
+//= require main
 //= require_tree .
+

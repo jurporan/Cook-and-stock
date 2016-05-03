@@ -1,14 +1,12 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %>
+    <div class="alert alert-success notice fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Success!</strong> <%= notice %>
+    </div>
+<% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @dish.name %>
-</p>
+<h4>Name: <small><%= @dish.name %> </small></h4>
+<h4>Directions : <small><%= @dish.directions %></small></h4>
 
-<p>
-  <strong>Directions:</strong>
-  <%= @dish.directions %>
-</p>
-
-<%= link_to 'Edit', edit_dish_path(@dish) %> |
-<%= link_to 'Back', dishes_path %>
+<%= link_to 'Edit', edit_dish_path(@dish), :class => "btn btn-default"%>
+<%= link_to 'Back', dishes_path, :class => "btn btn-default" %>
