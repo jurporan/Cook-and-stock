@@ -1,4 +1,4 @@
 class Ingredient < ActiveRecord::Base
-    has_many :dish_ingredient
-    has_many :ingredient_stock
+    has_many :dishes, :through => :dish_ingredients
+    has_many :dish_ingredients
 end

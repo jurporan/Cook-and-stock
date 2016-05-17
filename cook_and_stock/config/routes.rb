@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   resources :roles
   devise_for :users
   resources :users
-  resources :dishes
+  resources :dishes do
+      member do
+          get :add_ingredient
+      end
+  end
 
   root 'users#index'
 

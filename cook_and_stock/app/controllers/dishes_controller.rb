@@ -12,6 +12,11 @@ class DishesController < ApplicationController
     @dish = Dish.new
   end
 
+  def add_ingredient
+      @dish = Dish.find(params[:id])
+      @ingredients = Ingredient.all
+  end
+
   # GET /dishes/1
   def show
   end

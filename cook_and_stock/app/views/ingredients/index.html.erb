@@ -15,10 +15,9 @@
   </thead>
 
   <tbody>
-    <% @dishes.each do |dish| %>
+    <% @ingredients.each do |ingredient| %>
       <tr>
-        <td><%= dish.name %></td>
-        <td><%= dish.directions %></td>
+        <td><%= ingredient.name %></td>
         <td>
           <%= link_to 'Show', ingredient_path(ingredient), :class => "btn btn-sm btn-default" %>
           <%= link_to 'Edit', edit_ingredient_path(ingredient), :class => "btn btn-sm btn-default" %>
