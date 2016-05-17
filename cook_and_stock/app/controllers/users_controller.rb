@@ -1,18 +1,12 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource :except => :index
+  load_and_authorize_resource
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
-  end
-
-  # GET /users/1
-  # GET /users/1.json
-  def show
-    authorize! :read, @user, :message => "Vous n'avez pas l'autorisation "
   end
 
   # GET /users/new

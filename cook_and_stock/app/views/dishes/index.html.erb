@@ -4,6 +4,12 @@
     <strong>Success!</strong> <%= notice %>
   </div>
 <% end %>
+<% if flash[:alert] %>
+    <div class="alert alert-danger notice fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Warning!</strong> <%= flash[:alert] %>
+    </div>
+<% end %>
 
 <h1>Listing Dishes</h1>
 

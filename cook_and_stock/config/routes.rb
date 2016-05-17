@@ -7,14 +7,14 @@ Rails.application.routes.draw do
   resources :ingredients
   resources :roles
   devise_for :users
-  resources :users
+  resources :users, :except => :show
   resources :dishes do
       member do
           get :add_ingredient
       end
   end
 
-  root 'users#index'
+  root 'dishes#index'
 
   resources :users do
     member do

@@ -13,7 +13,7 @@ class Ability
       can :voir_roles, User
     end
     if user.has_role?(:utilisateur)
-      can :read, :all
+      can :read, Dish
     end
   end
 end
