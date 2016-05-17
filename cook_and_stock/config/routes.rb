@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :dish_ingredients
   resources :ingredients
   resources :roles
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations'}
   resources :users, :except => :show
   resources :dishes do
       member do

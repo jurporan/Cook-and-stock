@@ -85,6 +85,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
+      print "Non de tcheu"
       params.require(:user).permit(:firstname, :lastname, :email)
     end
 end
