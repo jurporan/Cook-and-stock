@@ -12,8 +12,6 @@ class Ability
     end
     if user.has_role?(:manager)
       can :read, Dish
-    else
-      #user.roles << Role.find_by(name: 'Client')
     end
   end
 end

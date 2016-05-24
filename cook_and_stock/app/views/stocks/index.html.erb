@@ -12,6 +12,7 @@
     <tr>
       <th>Name</th>
       <th>Location</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -21,13 +22,107 @@
         <td><%= stock.name %></td>
         <td><%= stock.location %></td>
         <td>
-          <%= link_to 'Show', stock_path(stock), :class => "btn btn-sm btn-default" %>
+          <button type="button" class="btn btn-sm btn-default accordion-toggle" data-toggle="collapse" data-target="#conf<%= stock.id%>">Show ingredients</button>
+          <% #<%= link_to 'Show', stock_path(stock), :class => "btn btn-sm btn-default" %>
           <%= link_to 'Edit', edit_stock_path(stock), :class => "btn btn-sm btn-default" %>
           <%= link_to 'Destroy', stock, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-default" %>
         </td>
       </tr>
-    <% end %>
+      <tr>
+        <td colspan="3" class="hiddenRow">
+          <div class="accordian-body collapse" id="conf<%= stock.id%>">
+            <table class="ingredients_table">
+              <thead>
+                <tr>
+                  <th>Ingredient</th>
+                  <th>Quantity</th>
+                  <th>Unity</th>
+                  <th data-halign="center"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% stock.ingredient_stock.each do |ingredient_stock|  %>
+                  <tr>
+                    <td><%= ingredient_stock.ingredient.name %></td>
+                    <td><a href="#" data-type="text" data-pk="<%= ingredient_stock.id %>" data-url="/ingredient_stocks/<%= ingredient_stock.id %>" class="quantity-editable"><%= ingredient_stock.quantity %></a></td>
+                    <td><%= ingredient_stock.quantity_unit %></td>
+                    <td><a href="#" class="remove-ingredient" data-url="/ingredient_stocks/<%= ingredient_stock.id %>"><i class="glyphicon glyphicon-remove"></i></a></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <br>
+            <% # TODO Formulaire pour ajouter dynamiquement un ingédient dans la liste des ingrédients et par rapport au stock en cours%>
+            <!-- form_for @ingredient_stocks, url: {action: "create"}, :class => "form-inline" do |f| %>
+               f.collection_select :ingredient_id, @ingredients, :id, :name, :class => "form-control" %>
+               f.number_field :quantity, :class => "form-control", :placeholder => "Quantity" %>
+               f.text_field :quantity_unit, :class => "form-control", :placeholder => "Unity" %>
+               f.submit "Add", :class => "btn btn-primary" %>
+               end %>
+             end %> -->
+            <!--<form class="form-inline" role="form">
+              <div class="form-group">
+                <input type="text" class="form-control" id="ingredient" placeholder="Ingredient">
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control" id="quantity" placeholder="Quantity">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="unity" placeholder="Unity">
+              </div>
+              <button type="submit" class="btn btn-primary">Add</button>
+            </form>-->
+          </div>
+        </td>
+      </tr>
+      <% end %>
   </tbody>
 </table>
+
+<script>
+  $(function () {
+    var table = $('.ingredients_table');
+    table.bootstrapTable({
+      /*columns: [
+       {
+       field: 'ingredient',
+       title: 'Ingredient'
+       },
+       {
+       field: 'quantity',
+       title: 'Quantity',
+       editable: true
+       }
+       ],
+       data: [
+       {ingredient: 'Sel', quantity: '500'}
+       ]*/
+    });
+
+    $.fn.editable.defaults.ajaxOptions = {type: "PATCH"};
+    $('.quantity-editable').editable({
+      validate: function(value) {
+        if(!$.isNumeric(value)){
+          return 'You must enter a numeric value !';
+        }
+      }
+    });
+
+    $('.remove-ingredient').click(function(){
+      if (window.confirm("Êtes-vous sûr ?")) {
+        $.ajax({
+          url: $(this).data('url'),
+          type: 'DELETE',
+          success: function (result) {
+            alert('success');
+          },
+          error: function (result) {
+            alert('error');
+          }
+        });
+      }
+    })
+  });
+</script>
 
 <%= link_to 'New Stock', new_stock_path, :class => "btn btn-success" %>

@@ -40,14 +40,18 @@ class IngredientStocksController < ApplicationController
   # PATCH/PUT /ingredient_stocks/1
   # PATCH/PUT /ingredient_stocks/1.json
   def update
+    # print ingredient_stock_params
+    @ingredient_stock.quantity = params[:value]
+    @ingredient_stock.save
     respond_to do |format|
-      if @ingredient_stock.update(ingredient_stock_params)
-        format.html { redirect_to @ingredient_stock, notice: 'Ingredient stock was successfully updated.' }
-        format.json { render :show, status: :ok, location: @ingredient_stock }
-      else
-        format.html { render :edit }
-        format.json { render json: @ingredient_stock.errors, status: :unprocessable_entity }
-      end
+      format.json { render :show, status: :ok, location: @ingredient_stock }
+      # if @ingredient_stock.update(ingredient_stock_params)
+      #  format.html { redirect_to @ingredient_stock, notice: 'Ingredient stock was successfully updated.' }
+      #  format.json { render :show, status: :ok, location: @ingredient_stock }
+      #else
+      #  format.html { render :edit }
+      #  format.json { render json: @ingredient_stock.errors, status: :unprocessable_entity }
+      # end
     end
   end
 

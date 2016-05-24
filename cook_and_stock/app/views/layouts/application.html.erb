@@ -3,7 +3,9 @@
 <head>
   <title>CookAndStock</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -30,6 +32,15 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
+          <% if can? :read, Dish %>
+            <li class="<%= 'active' if params[:controller] == 'dishes' %>"><%= link_to('Dishes', dishes_path) %></li>
+          <% end %>
+          <% if can? :manage, User %>
+            <li class="<%= 'active' if params[:controller] == 'users' %>"><%= link_to('Users', users_path) %></li>
+          <% end %>
+          <% if can? :manage, Stock %>
+            <li class="<%= 'active' if params[:controller] == 'stocks' %>"><%= link_to('Stocks', stocks_path) %></li>
+          <% end %>
         </ul>
         <% if user_signed_in? %>
           <ul class="nav navbar-nav navbar-right">
