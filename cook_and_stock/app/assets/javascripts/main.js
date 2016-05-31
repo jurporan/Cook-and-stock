@@ -123,13 +123,16 @@ $(function () {
         }
     });
 
+    var quantity = [];
     $('.order-dish').click(function () {
         var dish_name = $(this).closest('tr').find('td.dish-name').text();
         var dish_id = $(this).closest('tr').data('id');
         var $input_dish_ingredient = $(this).closest('tr').find('input[type="hidden"]');
+        var $ingredients_list = $('ul.list-unstyled');
 
         $('h4.modal-title').text('Order some "' + dish_name + '"');
         $('input[type="number"]').val(1);
+        $ingredients_list.empty();
 
         var ingredients = [];
         $input_dish_ingredient.each(function (idx) {
@@ -140,8 +143,9 @@ $(function () {
                 dataType: 'json'
             }).done(function (data) {
                 ingredients.push(data);
+                quantity.push(This.data('q'));
                 $('ul.list-unstyled').append(
-                    '<li><span class="glyphicon glyphicon glyphicon-chevron-right"></span> <strong>' + This.data('q')+' '
+                    '<li><span class="glyphicon glyphicon glyphicon-chevron-right"></span> <strong><span id="quantity-label">' + This.data('q')+'</span> '
                     + This.data('qu') +' </strong>de '+data.name+'</li>'
                 );
                 if(idx === $input_dish_ingredient.length - 1) {
@@ -153,6 +157,15 @@ $(function () {
         // TODO Mise à jour dynamique des quantités ingrédients sur le onChange d'un input type Number, continuez selon la feuille A4
 
 
+    });
+
+    $('input[type="number"]').bind('keyup mouseup', function () {
+        var $quantity_labels = $('ul.list-unstyled li span#quantity-label');
+        var quantity_nbr = $(this).val();
+
+        $quantity_labels.each(function (idx) {
+           $(this).text(quantity[idx] * quantity_nbr);
+        });
     });
 });
 
