@@ -13,6 +13,7 @@
  *= require bootstrap-theme.min
  *= require bootstrap.min
  *= require bootstrap-table.min
+ *= require select2.min
  *= require main
  *= require_tree .
  *= require_self

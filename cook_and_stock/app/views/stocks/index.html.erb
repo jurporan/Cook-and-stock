@@ -30,14 +30,14 @@
       </tr>
       <tr>
         <td colspan="3" class="hiddenRow">
-          <div class="accordian-body collapse" id="conf<%= stock.id%>">
+          <div class="accordian-body collapse" id="conf<%= stock.id%>" data-id="<%= stock.id %>">
             <table class="ingredients_table">
               <thead>
                 <tr>
                   <th>Ingredient</th>
                   <th>Quantity</th>
                   <th>Unity</th>
-                  <th data-halign="center"></th>
+                  <th data-halign="center">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -46,7 +46,7 @@
                     <td><%= ingredient_stock.ingredient.name %></td>
                     <td><a href="#" data-type="text" data-pk="<%= ingredient_stock.id %>" data-url="/ingredient_stocks/<%= ingredient_stock.id %>" class="quantity-editable"><%= ingredient_stock.quantity %></a></td>
                     <td><%= ingredient_stock.quantity_unit %></td>
-                    <td><a href="#" class="remove-ingredient" data-url="/ingredient_stocks/<%= ingredient_stock.id %>"><i class="glyphicon glyphicon-remove"></i></a></td>
+                    <td><%= link_to 'Delete', ingredient_stock, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-danger"  %></td>
                   </tr>
                 <% end %>
               </tbody>
@@ -60,69 +60,27 @@
                f.submit "Add", :class => "btn btn-primary" %>
                end %>
              end %> -->
-            <!--<form class="form-inline" role="form">
+            <form class="form-inline add-ingredients" role="form">
               <div class="form-group">
-                <input type="text" class="form-control" id="ingredient" placeholder="Ingredient">
+                <select required name="ingredient" class="select-ingredient" multiple="multiple" style="width: 100%">
+                  <% @ingredients.each do |ingredient| %>
+                    <option value="<%= ingredient.id %>"><%= ingredient.name %></option>
+                  <% end %>
+                </select>
               </div>
               <div class="form-group">
-                <input type="number" class="form-control" id="quantity" placeholder="Quantity">
+                <input required name="quantity" type="number" class="form-control" id="quantity" placeholder="Quantity">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="unity" placeholder="Unity">
+                <input required name="unity" type="text" class="form-control" id="unity" placeholder="Unity">
               </div>
-              <button type="submit" class="btn btn-primary">Add</button>
-            </form>-->
+              <button type="submit" class="btn btn-primary add-ingredient">Add</button>
+            </form>
           </div>
         </td>
       </tr>
       <% end %>
   </tbody>
 </table>
-
-<script>
-  $(function () {
-    var table = $('.ingredients_table');
-    table.bootstrapTable({
-      /*columns: [
-       {
-       field: 'ingredient',
-       title: 'Ingredient'
-       },
-       {
-       field: 'quantity',
-       title: 'Quantity',
-       editable: true
-       }
-       ],
-       data: [
-       {ingredient: 'Sel', quantity: '500'}
-       ]*/
-    });
-
-    $.fn.editable.defaults.ajaxOptions = {type: "PATCH"};
-    $('.quantity-editable').editable({
-      validate: function(value) {
-        if(!$.isNumeric(value)){
-          return 'You must enter a numeric value !';
-        }
-      }
-    });
-
-    $('.remove-ingredient').click(function(){
-      if (window.confirm("Êtes-vous sûr ?")) {
-        $.ajax({
-          url: $(this).data('url'),
-          type: 'DELETE',
-          success: function (result) {
-            alert('success');
-          },
-          error: function (result) {
-            alert('error');
-          }
-        });
-      }
-    })
-  });
-</script>
 
 <%= link_to 'New Stock', new_stock_path, :class => "btn btn-success" %>

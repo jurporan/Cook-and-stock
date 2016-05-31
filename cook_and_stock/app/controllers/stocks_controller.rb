@@ -6,6 +6,7 @@ class StocksController < ApplicationController
   # GET /stocks
   # GET /stocks.json
   def index
+    @ingredients = Ingredient.all
     @stocks = Stock.all
   end
 

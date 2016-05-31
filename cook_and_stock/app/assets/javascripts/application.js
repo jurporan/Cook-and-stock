@@ -18,6 +18,7 @@
 //= require data-confirm-modal
 //= require bootstrap-table.min
 //= require bootstrap-table-editable
+//= require select2.min
 //= require main
 //= require_tree .
 
