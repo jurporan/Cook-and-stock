@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   resources :dishes do
-      member do
+      collection do
           get :add_ingredient
       end
   end

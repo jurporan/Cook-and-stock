@@ -23,6 +23,7 @@ class DishesController < ApplicationController
 
   # GET /dishes/1/edit
   def edit
+    @dish = Dish.find(params[:id])
   end
 
   # POST /dishes
