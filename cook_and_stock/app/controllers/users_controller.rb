@@ -1,18 +1,12 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource :except => :index
+  load_and_authorize_resource
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
-  end
-
-  # GET /users/1
-  # GET /users/1.json
-  def show
-    authorize! :read, @user, :message => "Vous n'avez pas l'autorisation "
   end
 
   # GET /users/new
@@ -91,6 +85,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
+      print "Non de tcheu"
       params.require(:user).permit(:firstname, :lastname, :email)
     end
 end

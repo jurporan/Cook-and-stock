@@ -6,15 +6,15 @@ Rails.application.routes.draw do
   resources :dish_ingredients
   resources :ingredients
   resources :roles
-  devise_for :users
-  resources :users
+  devise_for :users, controllers: { registrations: 'registrations'}
+  resources :users, :except => :show
   resources :dishes do
       collection do
           get :add_ingredient
       end
   end
 
-  root 'users#index'
+  root 'dishes#index'
 
   resources :users do
     member do

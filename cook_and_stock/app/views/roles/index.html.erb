@@ -1,12 +1,23 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %>
+    <div class="alert alert-success notice fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Success!</strong> <%= notice %>
+    </div>
+<% end %>
+<% if flash[:alert] %>
+    <div class="alert alert-danger notice fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Warning!</strong> <%= notice %>
+    </div>
+<% end %>
 
 <h1>Listing Roles</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -14,9 +25,9 @@
     <% @roles.each do |role| %>
       <tr>
         <td><%= role.name %></td>
-        <td><%= link_to 'Show', role %></td>
-        <td><%= link_to 'Edit', edit_role_path(role) %></td>
-        <td><%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', role, :class => "btn btn-sm btn-default" %>
+        <%= link_to 'Edit', edit_role_path(role), :class => "btn btn-sm btn-default" %>
+        <%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
