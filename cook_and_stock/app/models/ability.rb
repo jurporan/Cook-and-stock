@@ -8,10 +8,11 @@ class Ability
       can :manage, :all
     end
     if user.has_role?(:client)
-      can :manage, Dish
+      can :read, Dish
     end
     if user.has_role?(:manager)
       can :read, Dish
+      can :manage, Stock
     end
   end
 end

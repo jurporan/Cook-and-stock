@@ -59,6 +59,8 @@ $(function () {
         minimumResultsForSearch: -1
     });
 
+    $('#select-stock').select2();
+
     $("form.add-ingredients").on( "submit", function( event ) {
         event.preventDefault();
         var form = $(this).serializeArray();
@@ -119,6 +121,38 @@ $(function () {
                 location.reload(true);
             })
         }
+    });
+
+    $('.order-dish').click(function () {
+        var dish_name = $(this).closest('tr').find('td.dish-name').text();
+        var dish_id = $(this).closest('tr').data('id');
+        var $input_dish_ingredient = $(this).closest('tr').find('input[type="hidden"]');
+
+        $('h4.modal-title').text('Order some "' + dish_name + '"');
+        $('input[type="number"]').val(1);
+
+        var ingredients = [];
+        $input_dish_ingredient.each(function (idx) {
+            var This = $(this);
+            $.ajax({
+                method: "GET",
+                url: "/ingredients/" + $(this).data('iid'),
+                dataType: 'json'
+            }).done(function (data) {
+                ingredients.push(data);
+                $('ul.list-unstyled').append(
+                    '<li><span class="glyphicon glyphicon glyphicon-chevron-right"></span> <strong>' + This.data('q')+' '
+                    + This.data('qu') +' </strong>de '+data.name+'</li>'
+                );
+                if(idx === $input_dish_ingredient.length - 1) {
+                    $('#order').modal('show');
+                }
+            });
+        });
+
+        // TODO Mise à jour dynamique des quantités ingrédients sur le onChange d'un input type Number, continuez selon la feuille A4
+
+
     });
 });
 
