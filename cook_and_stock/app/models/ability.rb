@@ -12,6 +12,7 @@ class Ability
     end
     if user.has_role?(:manager)
       can :read, Dish
+      can :manage, Stock
     end
   end
 end

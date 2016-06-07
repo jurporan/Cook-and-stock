@@ -7,6 +7,7 @@ class DishesController < ApplicationController
   # GET /dishes.json
   def index
     @dishes = Dish.all
+    @stocks = Stock.all
   end
 
   # GET /dishes/new
