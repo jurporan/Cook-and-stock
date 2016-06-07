@@ -2,4 +2,9 @@
 
 <%= render 'form' %>
 
+
+<div class="actions">
+    <%= button_to "Add an ingredient", add_ingredient_dish_path(@dish),  :method => :get, :class => "btn btn-default"  %>
+</div>
+
 <%= link_to 'Back', dishes_path, :class => "btn btn-default" %>

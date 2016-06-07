@@ -9,8 +9,17 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations'}
   resources :users, :except => :show
   resources :dishes do
-      collection do
+      member do
           get :add_ingredient
+      end
+      member do
+          put :add_ingredient
+      end
+      member do
+          post :create_ingredient
+      end
+      member do
+          get :delete_ingredient
       end
   end
 
