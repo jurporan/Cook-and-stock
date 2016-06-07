@@ -10,6 +10,8 @@ class DishIngredientsController < ApplicationController
   # GET /dish_ingredients/1
   # GET /dish_ingredients/1.json
   def show
+    @dish = @dish_ingredient.dish_id
+    redirect_to edit_dish_path(@dish)
   end
 
   # GET /dish_ingredients/new
@@ -19,6 +21,7 @@ class DishIngredientsController < ApplicationController
 
   # GET /dish_ingredients/1/edit
   def edit
+    @dish = @dish_ingredient.dish_id
   end
 
   # POST /dish_ingredients
@@ -54,11 +57,9 @@ class DishIngredientsController < ApplicationController
   # DELETE /dish_ingredients/1
   # DELETE /dish_ingredients/1.json
   def destroy
+    @dish = @dish_ingredient.dish_id
     @dish_ingredient.destroy
-    respond_to do |format|
-      format.html { redirect_to dish_ingredients_url, notice: 'Dish ingredient was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to edit_dish_path(@dish)
   end
 
   private

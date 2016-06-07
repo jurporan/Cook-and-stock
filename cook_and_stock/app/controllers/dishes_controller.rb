@@ -28,14 +28,6 @@ class DishesController < ApplicationController
       redirect_to dish_path(@dish)
   end
 
-  def delete_ingredient
-      @dish = Dish.find(params[:id])
-  end
-
-  def update_ingredient
-      @dish = Dish.find(params[:id])
-  end
-
   # GET /dishes/1
   def show
   end
