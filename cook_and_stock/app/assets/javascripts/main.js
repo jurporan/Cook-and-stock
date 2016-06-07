@@ -139,10 +139,10 @@ $(function () {
 
         $('.list-group-item').click(function (e) {
             e.preventDefault();
-            $('#validate-order').removeClass('disabled');
             if(!$(this).hasClass('disabled')) {
                 $(this).addClass('active');
                 $(this).siblings().removeClass('active');
+                $('#validate-order').removeClass('disabled');
             }
         });
     }
