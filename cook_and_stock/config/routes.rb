@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       member do
           get :add_ingredient
       end
+      member do
+          post :create_ingredient
+      end
   end
 
   root 'dishes#index'

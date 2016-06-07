@@ -20,12 +20,21 @@ class DishesController < ApplicationController
       @ingredients = Ingredient.all
   end
 
+  def create_ingredient
+      @dish = Dish.find(params[:id])
+      ingredient = DishIngredient.new(ingredient_params)
+      ingredient.dish = @dish
+      ingredient.save
+      redirect_to dish_path(@dish)
+  end
+
   # GET /dishes/1
   def show
   end
 
   # GET /dishes/1/edit
   def edit
+    @dish = Dish.find(params[:id])
   end
 
   # POST /dishes
@@ -77,5 +86,9 @@ class DishesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def dish_params
       params.require(:dish).permit(:name, :directions)
+    end
+
+    def ingredient_params
+        params.require(:dish_ingredients).permit(:ingredient_id, :quantity,:quantity_unit)
     end
 end
