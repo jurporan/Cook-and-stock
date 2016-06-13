@@ -8,5 +8,23 @@
 <h4>Name: <small><%= @dish.name %> </small></h4>
 <h4>Directions : <small><%= @dish.directions %></small></h4>
 
+Ingredients
+<table class="table">
+    <thead>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Unit</th>
+    </thead>
+    <tbody>
+        <% @dish.dish_ingredients.each do |ingr| %>
+        <tr>
+            <td><%=ingr.ingredient.name%></td>
+            <td><%=ingr.quantity%></td>
+            <td><%=ingr.quantity_unit%></td>
+        </tr>
+        <%end%>
+    </tbody>
+</table>
+
 <%= link_to 'Edit', edit_dish_path(@dish), :class => "btn btn-default"%>
 <%= link_to 'Back', dishes_path, :class => "btn btn-default" %>
