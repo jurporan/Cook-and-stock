@@ -1,7 +1,7 @@
 /**
  * Created by jermo on 03.05.2016.
  */
-$(function () {
+$(document).on('page:load', function(){
     var table = $('.ingredients_table');
 
     function loadBootstrapTable(table) {
@@ -169,7 +169,7 @@ $(function () {
 
                                 if(shortfall < 0) {
                                     listGroupText += '<p class="list-group-item-text">Il vous manque ' +
-                                         Math.abs(shortfall) + ' ' + quantity_unit[j] + ' de l\'ingrédient : ' + ingredients[j].name + '</p>';
+                                        Math.abs(shortfall) + ' ' + quantity_unit[j] + ' de l\'ingrédient : ' + ingredients[j].name + '</p>';
                                 }
 
                                 break;
@@ -270,12 +270,12 @@ $(function () {
                         url: "/ingredient_stocks/" + ingredientsInStock[stock_id][j].id,
                         data: {value: ingredientsInStock[stock_id][j].quantity - inputQuantity * quantity[i]}
                     }).done(function (data) {
-                       updateStocks($('.list-group'));
+                        updateStocks($('.list-group'));
                     });
                     break;
                 }
             }
         }
-    })
+    });
 });
 
