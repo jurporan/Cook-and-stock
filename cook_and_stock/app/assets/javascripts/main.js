@@ -9,22 +9,6 @@ $(function () {
     }
 
     loadBootstrapTable(table);
-    /*table.bootstrapTable({
-        /*columns: [
-         {
-         field: 'ingredient',
-         title: 'Ingredient'
-         },
-         {
-         field: 'quantity',
-         title: 'Quantity',
-         editable: true
-         }
-         ],
-         data: [
-         {ingredient: 'Sel', quantity: '500'}
-         ]*/
-    //});
 
     $.fn.editable.defaults.ajaxOptions = {type: "PATCH"};
     $('.quantity-editable').editable({
@@ -93,13 +77,6 @@ $(function () {
                     }},
                     dataType: 'json'
                 }).done(function (data) {
-                    /*var tr = "<tr>"+
-                                "<td>"+payload.ingredient+"</td>"+
-                                "<td><a href='#' data-type='text' data-pk="+data.id+" data-url='/ingredient_stocks/'"+data.id+" class='quantity-editable'>"+data.quantity+"</a></td>"+
-                                "<td>"+data.quantity_unit+"</td>"+
-                                "<td><a href='#' class='remove-ingredient btn btn-danger btn-sm' data-url='/ingredient_stocks/'"+data.id+">Delete</a></td>"+
-                            "</tr>";
-                    $table_ingredients.find('tbody').append(tr);*/
                     location.reload(true);
                 })
             })
