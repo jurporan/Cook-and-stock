@@ -4,8 +4,8 @@
 $(function () {
     var table = $('.ingredients_table');
 
-    function loadBootstrapTable(tble) {
-        tble.bootstrapTable();
+    function loadBootstrapTable(table) {
+        table.bootstrapTable();
     }
 
     loadBootstrapTable(table);
@@ -52,8 +52,8 @@ $(function () {
     });
 
     $('.select-ingredient').select2({
-        placeholder: 'Ingredient',
         tags: true,
+        placeholder: 'Ingredient',
         maximumSelectionLength: 1,
         minimumResultsForSearch: -1
     });
@@ -171,6 +171,8 @@ $(function () {
                 url: "/stocks",
                 dataType: 'json'
             }).done(function (stockData) {
+                console.log(ingredientsInStock);
+                console.log(stockData);
                 var stocks = [];
                 for(var i = 0; i < stockData.length; ++i) {
                     var listGroupText = "";
@@ -219,10 +221,13 @@ $(function () {
 
     }
 
-    var quantity = [];
-    var quantity_unit = [];
-    var ingredients = [];
+    var quantity;
+    var quantity_unit;
+    var ingredients;
     $('.order-dish').click(function () {
+        quantity = [];
+        quantity_unit = [];
+        ingredients = [];
         var dish_name = $(this).closest('tr').find('td.dish-name').text();
         var dish_id = $(this).closest('tr').data('id');
         var $input_dish_ingredient = $(this).closest('tr').find('input[type="hidden"]');
@@ -243,7 +248,8 @@ $(function () {
                 quantity.push(This.data('q'));
                 quantity_unit.push(This.data('qu'));
                 $('ul.list-unstyled').append(
-                    '<li><span class="glyphicon glyphicon glyphicon-chevron-right"></span> <strong><span id="quantity-label">' + This.data('q')+'</span> '
+                    '<li><span class="glyphicon glyphicon glyphicon-chevron-right"></span> ' +
+                    '<strong><span id="quantity-label">' + This.data('q')+'</span> '
                     + This.data('qu') +' </strong>de '+ data.name + '</li>'
                 );
                 if(idx === $input_dish_ingredient.length - 1) {

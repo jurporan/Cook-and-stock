@@ -6,9 +6,8 @@
 <% end %>
 
 <h4>Name: <small><%= @dish.name %> </small></h4>
-<h4>Directions : <small><%= @dish.directions %></small></h4>
 
-Ingredients
+<h4>Ingredients</h4>
 <table class="table">
     <thead>
         <th>Name</th>
@@ -26,5 +25,7 @@ Ingredients
     </tbody>
 </table>
 
-<%= link_to 'Edit', edit_dish_path(@dish), :class => "btn btn-default"%>
+<% if can? :manage, @dish %>
+  <%= link_to 'Edit', edit_dish_path(@dish), :class => "btn btn-default"%>
+<% end %>
 <%= link_to 'Back', dishes_path, :class => "btn btn-default" %>

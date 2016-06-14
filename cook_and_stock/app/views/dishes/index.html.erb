@@ -17,7 +17,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Directions</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -29,7 +28,6 @@
             <input type="hidden" data-did="<%= di.id %>" data-iid="<%= di.ingredient_id %>" data-q="<%= di.quantity %>" data-qu="<%= di.quantity_unit %>">
         <% end %>
         <td class="dish-name"><%= dish.name %></td>
-        <td><%= dish.directions %></td>
         <td>
           <%= link_to 'Show', dish_path(dish), :class => "btn btn-sm btn-default" %>
           <button type="button" class="btn btn-info btn-sm order-dish">Order</button>

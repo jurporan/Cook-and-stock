@@ -22,10 +22,12 @@
         <td><%= stock.name %></td>
         <td><%= stock.location %></td>
         <td>
+          <% if can? :manage, Stock %>
           <button type="button" class="btn btn-sm btn-default accordion-toggle" data-toggle="collapse" data-target="#conf<%= stock.id%>">Show ingredients</button>
           <% #<%= link_to 'Show', stock_path(stock), :class => "btn btn-sm btn-default" %>
-          <%= link_to 'Edit', edit_stock_path(stock), :class => "btn btn-sm btn-default" %>
-          <%= link_to 'Destroy', stock, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-default" %>
+            <%= link_to 'Edit', edit_stock_path(stock), :class => "btn btn-sm btn-default" %>
+            <%= link_to 'Destroy', stock, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-default" %>
+          <% end %>
         </td>
       </tr>
       <tr>
